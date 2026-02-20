@@ -1,0 +1,1939 @@
+/* ============================================================
+   🌿 STYLE PRINCIPAL — Voie Spirituelle
+   ------------------------------------------------------------
+   Version optimisée et entièrement commentée (2025)
+   Par : ChatGPT + Raphael
+   Objectif :
+   - Garder le même rendu et comportement qu'avant
+   - Supprimer doublons
+   - Ajouter des commentaires clairs
+   ============================================================ */
+
+
+/* ============================================================
+   🧭 TABLE DES MATIÈRES
+   ------------------------------------------------------------
+   1. BASE GÉNÉRALE
+   2. HEADER (Titre et fond)
+   3. NAVIGATION PRINCIPALE
+   4. SÉLECTEUR DE LANGUE (Lang Switch)
+   5. MENU BURGER (Mobile)
+   6. STRUCTURE DES SECTIONS GÉNÉRALES
+   7. BOUTONS GÉNÉRAUX + FLOTTANTS
+   8. ANIMATIONS GÉNÉRALES
+   9. FOOTER (Pied de page)
+   10. SERVICES (Cartes et carrousel)
+   11. LABS (Cadres thématiques)
+   12. CONTACT (Formulaire)
+   13. À PROPOS (Biographie, parcours)
+   14. RÉPONSES RESPONSIVE (Mobile)
+   ============================================================ */
+
+/* === PALETTE PRINCIPALE === */
+:root {
+  --bg-color: #F4F7F2;
+  --text-color: #2C2C2C;
+  --accent-color: #2E8B57;
+  --accent-light: #D7E4D0;
+  --accent-hover: #A9C9A4;
+  --footer-bg: #2E8B57;
+  --footer-gradient: #A9C9A4;
+  --header-gradient-start: #2E8B57;
+  --header-gradient-end: #A9C9A4;
+}
+
+/* ============================================================
+   1️⃣ SECTION BASE GÉNÉRALE
+   ------------------------------------------------------------
+   - Définit la typographie, couleurs et fond principal
+   - Applique un design doux et lumineux cohérent avec le thème
+   ============================================================ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Raleway', sans-serif;
+  line-height: 1.6;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+/* ============================================================
+   2️⃣ SECTION HEADER
+   ------------------------------------------------------------
+   - Gère le bandeau supérieur du site
+   - Comprend le titre doré et les bords arrondis inférieurs
+   ============================================================ */
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1200;
+  background: linear-gradient(135deg, var(--header-gradient-start), var(--header-gradient-end));
+  color: white;
+  padding: 1.4rem 1rem; /* ✅ un peu plus fin */
+  text-align: center;
+  border-bottom: 2px solid var(--accent-hover); /* ✅ fine ligne mousse */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* ✅ légère ombre douce */
+}
+
+/* Ajuste la taille du titre pour ne pas écraser le contenu */
+header h1 {
+  font-size: 2rem;
+  color: var(--accent-light);
+  margin: 0;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* === Décale le contenu pour ne pas qu’il passe sous le header === */
+body {
+  padding-top: 100px; /* ajuste selon la hauteur réelle du header */
+}
+
+header.shrink {
+  padding: 0.6rem 1rem;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+  transition: all 0.4s ease;
+}
+
+header.shrink h1 {
+  font-size: 1.4rem;
+  transition: font-size 0.4s ease;
+}
+
+
+/* ============================================================
+   3️⃣ SECTION NAVIGATION PRINCIPALE
+   ------------------------------------------------------------
+   - Barre de menu horizontale
+   - Liens standard + boutons “Services”, “Articles”, “Podcasts”
+   ============================================================ */
+
+nav {
+  text-align: center;
+}
+
+nav a {
+  margin: 0 14px;
+  color: var(--accent-light);
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: var(--accent-hover);
+}
+
+/* --- Boutons principaux du menu --- */
+nav .btn {
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
+  color: #2c2c2c;
+  padding: 8px 18px;
+  border-radius: 20px;
+  margin-left: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+}
+
+nav .btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(90deg, var(--accent-hover), var(--accent-light));
+}
+
+
+/* ============================================================
+   4️⃣ SECTION SÉLECTEUR DE LANGUE (LANG SWITCH)
+   ------------------------------------------------------------
+   - Bloc en haut à droite : drapeaux + FR / IT
+   ============================================================ */
+
+.lang-switch {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  color: #fdf6e3;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 6px 14px;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+  z-index: 999;
+}
+
+.lang-switch a {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--accent-hover); /* ✅ vert mousse clair */
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.lang-switch img {
+  display: block;
+  width: 20px;
+  height: 14px;
+  border-radius: 3px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+
+/* ============================================================
+   5️⃣ SECTION MENU BURGER (MOBILE)
+   ------------------------------------------------------------
+   - Contrôle du menu mobile avec l’icône “burger”
+   - Animation en croix lors de l’ouverture
+   ============================================================ */
+
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1100;
+}
+
+.burger span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: #fff;
+  border-radius: 2px;
+  transition: all 0.4s ease;
+}
+
+/* --- Animation en croix quand actif --- */
+.burger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.burger.active span:nth-child(2) {
+  opacity: 0;
+}
+.burger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* --- Overlay derrière le menu mobile --- */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease;
+  z-index: 1000;
+}
+
+.overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* ============================================================
+   6️⃣ SECTION DES BLOCS <section>
+   ------------------------------------------------------------
+   - Apparence commune de toutes les sections
+   ============================================================ */
+
+section {
+  max-width: 900px;
+  margin: 2.5rem auto;
+  padding: 2rem;
+  background:var(--bg-color);
+  border-radius: 15px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+section h2 {
+  font-family: 'Raleway', sans-serif;
+  color:var(--accent-color);
+  margin-bottom: 1rem;
+  border-left:5px solid var(--accent-hover);
+  padding-left: 0.5rem;
+}
+
+
+/* ============================================================
+   7️⃣ SECTION BOUTONS (GÉNÉRAUX ET FLOTTANTS)
+   ------------------------------------------------------------
+   - Styles pour les boutons standards et fixes à droite
+   ============================================================ */
+
+.btn,
+.cta {
+  display: inline-block;
+  background:var(--accent-color);
+  color:#fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition:transform .2s,box-shadow .2s,background .3s;
+}
+
+.btn:hover,
+.cta:hover {
+  background:var(--accent-hover);
+  color:var(--text-color);
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Boutons flottants fixes à droite --- */
+.floating {
+  position: fixed;
+  right: 20px;
+  background:var(--accent-color);
+  color:#fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 30px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+  z-index: 1050;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#floating-services {
+  bottom: 160px;
+  background:var(--accent-hover); color:var(--text-color);
+  color: #2c2c2c;
+}
+#floating-blog {
+  bottom: 100px;
+  background:var(--accent-light); color:var(--text-color);
+  color: #2c2c2c;
+}
+#floating-podcasts {
+  bottom: 40px;
+  background:var(--accent-color); color:#fff;
+  color: #fff;
+}
+
+.floating:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+/* ============================================================
+   8️⃣ SECTION ANIMATIONS GÉNÉRALES
+   ------------------------------------------------------------
+   - Définition des effets “fadeIn” et “pulseGlow”
+   ============================================================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2),
+      0 0 40px rgba(212, 175, 55, 0.15);
+  }
+  100% {
+    box-shadow: 0 0 35px rgba(212, 175, 55, 0.3),
+      0 0 70px rgba(212, 175, 55, 0.25);
+  }
+}
+
+
+/* ============================================================
+   9️⃣ SECTION FOOTER
+   ------------------------------------------------------------
+   - Pied de page avec liens et icônes sociales
+   ============================================================ */
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background:var(--text-color);
+  font-size: 0.9em;
+  color:var(--bg-color);
+  margin-top: 2rem;
+  border-top:3px solid var(--accent-hover);
+}
+
+.social-links {
+  margin-top: 1rem;
+}
+
+.social-icon {
+  margin: 0 15px;
+  display: inline-block;
+  color: var(--accent-color); /* ✅ vert forêt principal */
+  transition: color 0.3s, transform 0.2s;
+}
+
+
+.social-icon:hover {
+  transform: scale(1.3);
+}
+
+.social-icon.facebook:hover {
+  color: #1877f2;
+}
+.social-icon.instagram:hover {
+  color: #c13584;
+}
+.social-icon.youtube:hover {
+  color: #ff0000;
+}
+/* ============================================================
+   🔟 SECTION SERVICES — Cartes et Carrousel
+   ------------------------------------------------------------
+   - Présente les différents “Laboratoires”
+   - Inclut les cartes, carrousels et transitions
+   ============================================================ */
+
+/* --- Section principale contenant les cartes --- */
+.services-section {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 2rem 1.8rem;
+  text-align: center;
+}
+
+/* --- Carte de service individuelle --- */
+.service-card {
+  max-width: 380px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 2rem 1.6rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* --- Apparition fluide au scroll --- */
+.service-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Effet de survol --- */
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Titres et paragraphes dans les cartes --- */
+.service-card h3 {
+  color: var(--accent-color); /* ✅ vert forêt principal */
+  font-family: 'Raleway', sans-serif;
+  margin-bottom: 0.8rem;
+  font-size: 1.2rem;
+}
+
+.service-card p {
+  font-size: 1rem;
+  color: #2c2c2c;
+  line-height: 1.6;
+  margin-bottom: 1.2rem;
+}
+
+/* --- Bouton dans les cartes --- */
+.service-card .btn {
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.service-card .btn:hover {
+  background: linear-gradient(90deg, var(--accent-hover), var(--accent-light));
+  transform: scale(1.05);
+}
+/* ============================================================
+   💫 SECTION CARROUSEL DES LABORATOIRES
+   ------------------------------------------------------------
+   - Permet de faire défiler horizontalement les cartes
+   - Inclut flèches fixes gauche/droite
+   ============================================================ */
+
+.carousel-title {
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.4rem;
+  color: var(--accent-color); /* ✅ vert forêt principal */
+  font-weight: 600;
+  margin-top: 0.4rem;   
+  margin-bottom: 0.3rem;  
+  line-height: 1.2;
+  position: relative;
+}
+
+/* Petite ligne dorée décorative */
+.carousel-title::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: var(--accent-hover); /* ✅ vert mousse clair */
+  margin: 0.25rem auto 0;
+  border-radius: 2px;
+  opacity: 0.9;
+}
+
+.carousel-container {
+  position: relative;
+  max-width: 900px;
+  margin-top: 0.3rem !important;  
+  margin-bottom: 1rem !important;   
+}
+
+/* --- Bande du carrousel --- */
+.services-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  gap: 2rem;
+  padding: 2rem 1rem;
+  justify-content: flex-start;
+  align-items: stretch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-hover) transparent; /* ✅ vert mousse clair */
+}
+
+/* --- Masque la scrollbar sur Chrome/Safari --- */
+.services-carousel::-webkit-scrollbar {
+  height: 8px;
+}
+.services-carousel::-webkit-scrollbar-thumb {
+  background: var(--accent-hover); /* ✅ vert mousse clair */
+  border-radius: 10px;
+}
+
+/* --- Cartes à l’intérieur du carrousel --- */
+.carousel-card {
+  flex: 0 0 80%;        
+  scroll-snap-align: center;
+  background: var(--accent-light); /* vert brume clair #D7E4D0 */
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid color-mix(in srgb, var(--accent-hover) 40%, transparent); /* ✅ vert mousse doux */
+  padding: 1.2rem 1rem 1.4rem; 
+  text-align: center;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  opacity: 0.95;
+  width: 80%;
+  max-width: 500px;       
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.carousel-card:hover {
+  transform: scale(1.03);
+  opacity: 1;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Titre et icône --- */
+.carousel-card h3 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--accent-color); /* ✅ vert forêt principal */
+  font-size: 1.15rem;       
+  margin-bottom: 0.6rem;
+}
+
+/* --- Texte d’intro italique --- */
+.carousel-card .synthese {
+  font-style: italic;
+  color: #2c2c2c;
+  margin-bottom: 0.8rem;    
+  line-height: 1.45;
+}
+.carousel-card p {
+  flex-grow: 1; /* ✅ permet au texte de prendre l’espace restant */
+}
+
+/* --- Image de la carte --- */
+.carousel-card img {
+  display: block;
+  margin: 0.3rem auto 0.8rem;
+  border-radius: 10px;
+  max-height: 150px;        
+  object-fit: cover;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+.carousel-card .btn {
+  margin-top: auto; /* ✅ pousse le bouton en bas du flex */
+  align-self: center;
+}
+
+
+/* --- Flèches fixes du carrousel --- */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  background: rgba(255,255,255,0.85);
+  border: 2px solid var(--accent-hover); /* ✅ vert mousse clair */
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  cursor: pointer;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.carousel-arrow:hover {
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-arrow svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--accent-color); /* ✅ vert forêt principal */
+}
+
+.carousel-arrow.left { left: -20px; }
+.carousel-arrow.right { right: -20px; }
+
+/* --- Cache les flèches sur mobile --- */
+@media (max-width: 768px) {
+  .carousel-arrow {
+    display: none;
+  }
+}
+
+
+/* ============================================================
+   💜 SECTION CALL-TO-ACTION FINALE
+   ------------------------------------------------------------
+   - Bloc d’invitation à contacter ou participer
+   ============================================================ */
+
+.call-to-action {
+  background: linear-gradient(135deg, var(--accent-light), var(--bg-color)); /* ✅ vert brume vers fond clair */
+  padding: 2.5rem 2rem;
+  max-width: 720px;
+  margin: 3rem auto;
+  margin-top: 2rem !important;
+  border-radius: 18px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--accent-hover); /* ✅ vert mousse doux */
+  text-align: center;
+}
+
+.call-to-action h2 {
+  color: var(--accent-color); /* ✅ vert forêt principal */
+  font-family: 'Raleway', sans-serif;
+  border-bottom: 2px solid var(--accent-hover); /* ✅ vert mousse clair */
+  display: inline-block;
+  padding-bottom: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.call-to-action p {
+  max-width: 600px;
+  margin: 0 auto 1.5rem;
+  color: #2c2c2c;
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+
+.call-to-action .btn {
+  margin-top: 1.5rem;
+}
+
+
+/* ============================================================
+   ✨ SECTION CITATION FINALE
+   ------------------------------------------------------------
+   - Bloc stylisé avec guillemets dorés
+   ============================================================ */
+
+.closing-quote {
+  max-width: 720px;
+  margin: 3.5rem auto 4rem;
+  padding: 2rem 2.2rem;
+  background: radial-gradient(circle at top, var(--accent-light) 0%, var(--bg-color) 100%); /* ✅ du vert brume au fond clair */
+  border: 1.5px solid var(--accent-hover); /* ✅ vert mousse clair */
+  border-radius: 18px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  text-align: center;
+  font-style: italic;
+  color: var(--text-color);
+  position: relative;
+  line-height: 1.8;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInQuote 1s ease forwards 0.5s;
+}
+
+/* --- Guillemets décoratifs --- */
+.closing-quote::before {
+  content: "❝";
+  font-size: 2.4rem;
+  color: color-mix(in srgb, var(--accent-hover) 70%, transparent); /* ✅ vert mousse doux translucide */
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.closing-quote::after {
+  content: "❞";
+  font-size: 2.4rem;
+  color: color-mix(in srgb, var(--accent-hover) 70%, transparent); /* ✅ même ton que le haut */
+  position: absolute;
+  bottom: 10px;
+  right: 50%;
+  transform: translateX(50%);
+}
+
+/* --- Ligne verte sous la citation --- */
+.closing-quote em {
+  display: block;
+  margin-top: 1rem;
+  font-style: normal;
+  color: var(--accent-color); /* ✅ vert forêt profond */
+  font-weight: 600;
+  border-top: 1px solid var(--accent-hover); /* ✅ ligne vert mousse */
+  padding-top: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+/* --- Animation d’apparition --- */
+@keyframes fadeInQuote {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Responsive ajusté --- */
+@media (max-width: 768px) {
+  .closing-quote {
+    padding: 1.8rem 1.2rem;
+    font-size: 0.95rem;
+  }
+  .closing-quote::before,
+  .closing-quote::after { font-size: 1.8rem; }
+}
+/* ============================================================
+   💌 SECTION CONTACT — Formulaire de contact et disposition
+   ------------------------------------------------------------
+   - Deux colonnes : texte/image à gauche + formulaire à droite
+   - Conception moderne, responsive et douce
+   ============================================================ */
+
+.contact {
+  background: linear-gradient(180deg, #ffffff 0%, #fdfaf4 100%);
+  padding: 3rem 1rem;
+}
+
+.contact-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 18px;
+  border: 1.5px solid var(--accent-hover); /* ✅ vert mousse clair */
+  box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* --- Bloc gauche : texte et image --- */
+.contact-info {
+  flex: 1 1 380px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  color: #2c2c2c;
+  line-height: 1.7;
+}
+
+.contact-info h2 {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  font-size: 1.8rem;
+  color: var(--accent-color); /* ✅ vert forêt principal */
+  border-bottom: 2px solid var(--accent-hover); /* ✅ vert mousse clair */
+  display: inline-block;
+  padding-bottom: 0.3rem;
+  margin-bottom: 1.2rem;
+}
+
+.contact-info p {
+  font-size: 1.05rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact-info img {
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  margin-top: 1rem;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+/* --- Bloc droit : formulaire --- */
+.contact-form {
+  flex: 1 1 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-form label {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  color: var(--accent-color); /* ✅ vert forêt principal */
+  margin-bottom: 0.3rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1.5px solid color-mix(in srgb, var(--accent-color) 25%, transparent); /* ✅ bordure vert forêt translucide */
+  border-radius: 10px;
+  background: var(--bg-color); /* ✅ fond clair et naturel */
+  font-family: 'Merriweather', serif;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--accent-hover); /* ✅ vert mousse au focus */
+  box-shadow: 0 0 8px color-mix(in srgb, var(--accent-hover) 60%, transparent); /* ✅ halo vert doux */
+  outline: none;
+}
+
+/* --- Bouton Envoyer --- */
+.contact-form .btn {
+  align-self: center;
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
+  color: #2c2c2c;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+}
+
+.contact-form .btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(90deg, var(--accent-hover), var(--accent-light));
+  box-shadow: 0 10px 18px rgba(0,0,0,0.15);
+}
+
+/* --- Message de confirmation --- */
+#form-status {
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  color: var(--accent-color); /* ✅ vert forêt principal */
+  margin-top: 1rem;
+}
+
+/* --- Responsive mobile --- */
+@media (max-width: 768px) {
+  .contact-container {
+    flex-direction: column;
+    padding: 1.5rem;
+  }
+  .contact-info img {
+    margin: 1rem auto;
+    width: 90%;
+  }
+  .contact-form { width: 100%; }
+  .contact-form .btn { width: 100%; }
+}
+
+
+/* ============================================================
+   📘 SECTION À PROPOS — Biographie et CV
+   ------------------------------------------------------------
+   - Présente le portrait, parcours et recherches
+   - Style doré, arrondi, centré
+   ============================================================ */
+
+.intro-about {
+  max-width: 520px;
+  margin: 3rem auto;
+  padding: 1.8rem 2rem;
+  background: var(--bg-color); /* ✅ fond clair naturel */
+  border: 1.5px solid var(--accent-hover); /* ✅ vert mousse clair */
+  border-radius: 20px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+  text-align: justify;
+  line-height: 1.75;
+  animation: fadeIn 1s ease-in-out;
+  position: relative;
+}
+
+.intro-about::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent-hover) 30%, transparent), transparent 70%); /* ✅ halo vert mousse translucide */
+  pointer-events: none;
+}
+
+.intro-about h2 {
+  text-align: center;
+  color: var(--accent-color); /* ✅ vert forêt */
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  border-bottom: 1.5px solid var(--accent-hover); /* ✅ ligne vert mousse */
+  padding-bottom: 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+/* --- Portrait circulaire --- */
+.intro-about img {
+  display: block;
+  max-width: 40%;
+  margin: 1.2rem auto 1.8rem;
+  border-radius: 50%;
+  border: 1px solid var(--accent-hover); /* ✅ bordure vert mousse */
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  opacity: 0.95;
+  transition: transform 0.4s ease, box-shadow 0.3s ease;
+}
+
+.intro-about img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .intro-about {
+    max-width: 90%;
+    padding: 1.5rem;
+  }
+  .intro-about img {
+    max-width: 70%;
+  }
+}
+
+
+/* ============================================================
+   📜 LISTES PERSONNALISÉES — Puces dorées et icônes
+   ============================================================ */
+
+section ul {
+  list-style: none;
+  margin: 1rem 0 1.5rem 0;
+  padding-left: 0;
+}
+
+section li {
+  position: relative;
+  margin-bottom: 0.6rem;
+  padding-left: 1.4rem;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* --- Puce verte élégante --- */
+section li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent-hover); /* ✅ vert mousse clair */
+  font-size: 1.3rem;
+  line-height: 1.2;
+}
+
+/* --- Variante étoile --- */
+section li.star::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0.3rem;
+  width: 14px;
+  height: 14px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23d4af37' viewBox='0 0 24 24'%3E%3Cpath d='M12 17.27l6.18 3.73-1.64-7.03L21 9.24l-7.19-.61L12 2 10.19 8.63 3 9.24l4.46 4.73L5.82 21z'/%3E%3C/svg%3E") no-repeat center center;
+  background-size: contain;
+  opacity: 0.9;
+}
+
+
+/* ============================================================
+   🪶 BOUTON “TÉLÉCHARGER” — Élégant et lisible
+   ============================================================ */
+
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-hover)); /* ✅ dégradé vert forêt → mousse */
+  color: var(--text-color);
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 25px;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
+}
+
+.download-btn:hover {
+  background: linear-gradient(90deg, var(--accent-hover), var(--accent-light)); /* ✅ vert clair et brume au survol */
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  color: var(--text-color);
+}
+
+.download-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--text-color); /* ✅ cohérent avec le texte du bouton */
+}
+
+
+
+/* ============================================================
+   📱 NAVIGATION MOBILE — Version burger & overlay
+   ------------------------------------------------------------
+   - Transforme la nav en panneau latéral sur mobile
+   ============================================================ */
+
+@media (max-width: 768px) {
+  nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100%;
+    background: linear-gradient(180deg, var(--header-gradient-start), var(--header-gradient-end)); /* ✅ du vert forêt au vert mousse */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 1.8rem;
+    padding-top: 4rem;
+    transition: right 0.4s ease;
+    z-index: 1001;
+  }
+
+  nav.active { right: 0; }
+
+  nav a {
+    color: var(--accent-light); /* ✅ vert brume clair pour bon contraste */
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-decoration: none;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease, color 0.3s;
+  }
+
+  nav.active a {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  nav.active a:nth-child(1) { transition-delay: 0.1s; }
+  nav.active a:nth-child(2) { transition-delay: 0.2s; }
+  nav.active a:nth-child(3) { transition-delay: 0.3s; }
+
+  nav a:hover { 
+    color: var(--accent-hover); /* ✅ vert mousse clair au survol */
+  }
+
+  nav a.btn { display: none !important; }
+
+  /* --- Icône burger --- */
+  .burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 22px;
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1100;
+  }
+
+  .burger span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: #fff;
+    border-radius: 2px;
+    transition: all 0.4s ease;
+  }
+
+  .burger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .burger.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .burger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+
+  /* --- Fond d’assombrissement derrière le menu --- */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease;
+    z-index: 1000;
+  }
+
+  .overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+  /* --- Lang-switch mobile visible dans le menu --- */
+  .lang-switch.mobile {
+    display: block;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  .lang-switch.mobile img {
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+
+  /* Cache le sélecteur principal du header sur mobile */
+  header > .lang-switch {
+    display: none;
+  }
+
+
+/* ============================================================
+   ✅ FIN DU FICHIER — Voie Spirituelle (2025)
+   ------------------------------------------------------------
+   Fichier commenté et optimisé pour compréhension complète
+   ============================================================ */
+
+
+/* ============================================================
+   ✨ MISE EN ÉVIDENCE À LA FIN DE LA PAGE
+   ------------------------------------------------------------
+   - Les mots ciblés deviennent gras + surlignés en jaune
+   - Activation automatique quand on atteint le bas de la page
+   ============================================================ */
+.bold-on-scroll {
+  font-weight: normal;
+  background: none;
+  transition: all 0.6s ease;
+}
+
+.bold-on-scroll.active {
+  font-weight: bold;
+  background: linear-gradient(transparent 60%, #fff3a6 60%);
+  color: #2c2c2c; /* tu peux mettre #4b2e83 pour un contraste plus fort */
+}
+/* ============================================================
+   📱 HEADER MOBILE FIXE ET COMPACT
+   ------------------------------------------------------------
+   - Réduit la hauteur du bandeau violet
+   - Rend le titre plus petit
+   - Garde le header et le menu burger visibles au scroll
+   ============================================================ */
+
+@media (max-width: 768px) {
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1200; /* au-dessus du reste */
+    background: linear-gradient(135deg, var(--header-gradient-start), var(--header-gradient-end));
+    padding: 0.8rem 1rem; /* ✅ beaucoup plus fin */
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  }
+
+  /* ✅ Le titre devient plus petit */
+  header h1 {
+  font-size: 1.5rem;
+  margin: 0;
+  color: var(--accent-light); /* ✅ vert clair au lieu du doré */
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+  /* ✅ Espace réservé sous le header pour que le contenu ne passe pas dessous */
+  body {
+    padding-top: 70px; /* ajuste selon la hauteur du header */
+  }
+
+  /* ✅ Le menu burger reste bien placé */
+  .burger {
+    position: fixed;
+    top: 18px;
+    right: 20px;
+    z-index: 1300;
+  }
+
+  /* ✅ Le menu déroulant (nav.active) s’affiche sous le header fixe */
+  nav {
+    top: 60px; /* juste en dessous du header */
+    height: calc(100% - 60px);
+  }
+
+  /* ✅ On masque le ruban arrondi du header sur mobile */
+  header::after {
+    display: none;
+  }
+}
+/* ============================================================
+   📱 Ajustement de la hauteur des cartes du carrousel en mobile
+   ------------------------------------------------------------
+   - Réduit la hauteur visuelle sans modifier la largeur
+   ============================================================ */
+@media (max-width: 768px) {
+  .carousel-title {
+    font-size: 1.2rem;
+    margin-top: 0.3rem;
+    margin-bottom: 0.2rem;
+  }
+  .carousel-title::after {
+    width: 30px;
+    height: 1.5px;
+    margin-top: 0.2rem;
+  }
+}
+  .carousel-card {
+    justify-content: flex-start;
+    padding-bottom: 1rem;
+    max-height: none;         
+    overflow: visible;         
+  }
+
+  .carousel-card img {
+    max-height: 120px;
+    margin: 0.4rem auto 0.6rem;
+  }
+
+  .carousel-card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .carousel-card .synthese {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: 0.6rem;
+  }
+
+  .carousel-card p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+  }
+
+  .carousel-card .btn {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.85rem;
+    margin-top: 0.4rem;
+    align-self: center;       
+  }
+
+  .carousel-card .mini-invite {
+    font-size: 0.8rem;
+    margin-top: 0.4rem;
+  }
+
+/* ============================================================
+   🌿 FICHE ATELIER — Détails des laboratoires (lab1–lab5)
+   ------------------------------------------------------------
+   - Présente les informations concrètes et pratiques
+   - Style clair et doux
+   ============================================================ */
+.lab-details {
+  max-width: 800px;
+  margin: 2rem auto 3rem;
+  background:var(--bg-color);
+  padding: 2rem 2.2rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  border:1px solid color-mix(in oklab, var(--accent-hover) 40%, transparent);
+  animation: fadeIn 1s ease-in-out;
+}
+
+.lab-details h2 {
+  color:var(--accent-color);
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.3rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.8rem;
+  border-left:4px solid var(--accent-hover);
+  padding-left: 0.5rem;
+}
+
+.lab-details h3 {
+  color: #2c2c2c;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.lab-details p {
+  color: #2c2c2c;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.lab-details ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0.8rem 0 1.2rem;
+}
+
+.lab-details li {
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 1.4rem;
+}
+
+.lab-details li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent-hover); /* ✅ vert mousse clair */
+  font-size: 1.2rem;
+}
+
+
+/* --- Colonnes Inputs / Outputs --- */
+.lab-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.lab-columns > div {
+  flex: 1 1 300px;
+  background: color-mix(in srgb, var(--accent-light) 70%, white);
+  border: 1px solid var(--accent-hover); /* ✅ vert mousse clair */
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+}
+
+/* --- Bouton inscription --- */
+.lab-details .btn {
+  display: inline-block;
+  margin-top: 1rem;
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-hover)); /* ✅ dégradé vert forêt → mousse */
+  color: var(--text-color);
+  font-weight: 600;
+  padding: 0.8rem 1.6rem;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.lab-details .btn:hover {
+  background: linear-gradient(90deg, var(--accent-hover), var(--accent-light)); /* ✅ dégradé vert mousse → brume douce */
+  transform: scale(1.05);
+}
+
+/* --- Version mobile --- */
+@media (max-width: 768px) {
+  /* --- Conteneur général plus léger --- */
+  .lab-details {
+    padding: 1.2rem 1.2rem;
+    background: var(--bg-color); /* ✅ fond vert clair naturel */
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+  }
+
+  .lab-details h2 {
+    font-size: 1.1rem;
+    margin-top: 1.2rem;
+    margin-bottom: 0.4rem;
+    border-left: 3px solid var(--accent-hover); /* ✅ vert mousse clair */
+    padding-left: 0.4rem;
+  }
+
+  .lab-details p,
+  .lab-details li {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+}
+
+  /* --- Colonne Inputs / Outputs : devient pile verticale --- */
+  .lab-columns {
+    gap: 0.6rem !important;
+    margin-bottom: 0.8rem !important; 
+  }
+
+  .lab-columns > div {
+    padding: 0.8rem 1rem;
+    margin-bottom: 0 !important; 
+  }
+
+  .lab-columns h3 {
+    margin-bottom: 0.4rem;
+  }
+    .lab-columns ul {
+    margin-bottom: 0.2rem;
+  }
+
+  .lab-columns li {
+    margin-bottom: 0.3rem;
+    line-height: 1.4;
+  }
+
+  /* --- Bouton d’inscription centré et lisible --- */
+  .lab-details .btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+  }
+/* ============================================================
+   🌿 VIDÉO FLOTTANTE DE PRÉSENTATION
+   ------------------------------------------------------------ */
+
+.video-floating {
+  width: 260px;              /* ✅ limite la taille normale */
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  z-index: 999;
+  background: var(--accent-light);
+  border: 2px solid var(--accent-hover);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+  animation: videoFadeIn 1.2s ease-out 0.4s both;
+}
+
+.video-wrapper {
+  position: relative; /* référence pour les éléments internes */
+  overflow: hidden;   /* évite que les boutons dépassent */
+}
+
+.video-wrapper video {
+  width: 100%;               /* ✅ la vidéo s’adapte au conteneur */
+  height: auto;
+  display: block;
+  border-radius: 14px;
+  transition: transform 0.4s ease; /* ✅ pour le petit zoom fluide */
+}
+/* Boutons de la seconde vidéo, ancrés AU CONTENEUR DE LA VIDÉO */
+.video-wrapper #secondVideoButtons {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  z-index: 20;              /* au-dessus de la vidéo */
+  display: flex;
+  flex-direction: column;   /* empile en vertical; mets row si tu préfères côte à côte */
+  gap: 0.4rem;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+
+/* Apparition */
+.video-wrapper #secondVideoButtons.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* Style boutons interne */
+.video-wrapper #secondVideoButtons .btn {
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
+  color: var(--text-color);
+  border-radius: 18px;
+  padding: 0.35rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.video-floating.expanded {
+  width: 420px;                  /* ✅ élargit le cadre */
+  height: auto;
+  bottom: 40px;                  /* ✅ petit ajustement vertical */
+  left: 40px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.3);
+  transition: all 0.4s ease-in-out; /* ✅ anime l’agrandissement */
+  z-index: 1000;
+}
+
+
+.video-floating.expanded video {
+  transform: scale(1.05);
+}
+
+
+
+/* ✅ Boutons intégrés à la vidéo avec effet fade + slide */
+.video-overlay-buttons {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  gap: 0.4rem;
+  opacity: 0;
+  transform: translateY(20px); /* ↓ départ en dessous */
+  pointer-events: none;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* ✅ Apparition fluide */
+.video-overlay-buttons.visible {
+  opacity: 1;
+  transform: translateY(0); /* ↑ glissement vers le haut */
+  pointer-events: auto;
+}
+
+/* ✅ Style des boutons */
+.video-overlay-buttons .btn {
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
+  color: var(--text-color);
+  border-radius: 20px;
+  font-size: 0.8rem;
+  padding: 0.4rem 0.8rem;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: transform 0.25s ease, background 0.3s ease;
+}
+
+.video-overlay-buttons .btn:hover {
+  transform: scale(1.07);
+  background: linear-gradient(90deg, var(--accent-hover), var(--accent-light));
+}
+
+/* ============================================================
+   🌿 VERSION MOBILE — Vidéo flottante bas gauche
+   ------------------------------------------------------------ */
+@media (max-width: 768px) {
+  /* ✅ Position : bas gauche (comme desktop mais plus compacte) */
+  .video-floating {
+    bottom: 15px;
+    left: 15px;
+    right: auto;
+    width: 180px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+    transform-origin: bottom left;
+    cursor: pointer;
+  }
+
+.video-wrapper video {
+  width: 100%;               /* ✅ la vidéo s’adapte au conteneur */
+  height: auto;
+  display: block;
+  border-radius: 14px;
+  transition: transform 0.4s ease; /* ✅ pour le petit zoom fluide */
+}
+
+
+  /* ✅ Quand agrandie : légère mise en avant */
+  .video-floating.expanded {
+    width: 300px;
+    bottom: 25px;
+    left: 25px;
+  }
+
+.video-floating.expanded video {
+  transform: scale(1.1); /* ✅ léger zoom de la vidéo elle-même */
+}
+
+  /* ✅ Boutons centrés dans la vidéo */
+  .video-overlay-buttons {
+    bottom: 50%;
+    right: 50%;
+    transform: translate(50%, 50%) scale(0.95);
+    gap: 0.6rem;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ✅ Apparition fluide */
+  .video-overlay-buttons.visible {
+    transform: translate(50%, 50%) scale(1);
+    opacity: 1;
+  }
+
+  /* ✅ Style adapté */
+.video-overlay-buttons .btn {
+  font-size: 0.65rem;                /* 🧩 police plus fine */
+  padding: 0.25rem 0.6rem;           /* 🧩 boutons plus compacts */
+  border-radius: 14px;               /* 🌿 coins légèrement plus ronds */
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
+  box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+  min-width: 70px;                   /* ✋ taille tactile minimale */
+  text-align: center;
+}
+
+  .video-overlay-buttons .btn:hover {
+    transform: scale(1.03);
+  }
+}
+/* ============================================================
+   🌸 ANIMATION D’APPARITION — Vidéo flottante douce
+   ------------------------------------------------------------ */
+@keyframes videoFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ✅ Appliquer l’effet sur le conteneur vidéo */
+.video-floating {
+  animation: videoFadeIn 1.2s ease-out 0.4s both;
+  cursor: pointer;
+}
+/* ============================================================
+   🌙 EFFET DE FOND (BACKDROP) — Lors de l’agrandissement vidéo
+   ------------------------------------------------------------ */
+.video-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);      /* ✅ voile sombre semi-transparent */
+  backdrop-filter: blur(4px);           /* ✅ léger flou pour effet ciné */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease;
+  z-index: 950; /* juste en dessous de la vidéo */
+}
+
+/* ✅ Apparition du voile quand la vidéo est agrandie */
+.video-floating.expanded + .video-backdrop {
+  opacity: 1;
+  visibility: visible;
+}
+/* ============================================================
+   ▶️ INDICATEUR DE LECTURE / PAUSE + BARRE DE PROGRESSION
+   ------------------------------------------------------------ */
+
+/* --- Icône Play/Pause --- */
+.video-play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  width: 48px;
+  height: 48px;
+  color: var(--accent-color); /* ✅ vert forêt */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.3s ease;
+  z-index: 5;
+}
+
+.video-play-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.video-play-icon.visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* 🌿 Barre de progression style Voie Spirituelle */
+.video-progress {
+  position: relative;
+  height: 6px;
+  background: color-mix(in srgb, var(--accent-light) 60%, white);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: height 0.2s ease, background 0.2s ease;
+}
+
+.video-progress:hover {
+  height: 8px;
+  background: color-mix(in srgb, var(--accent-hover) 70%, white);
+}
+
+.video-progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
+  border-radius: 3px;
+  transition: width 0.1s linear, background 0.3s ease;
+}
+
+.video-progress-handle {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background: var(--accent-hover);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.1s ease;
+}
+
+.video-progress:hover .video-progress-handle {
+  opacity: 1;
+}
+
+.video-progress-handle:hover {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+
+/* ============================================================
+   📱 DÉPLACEMENT DES BOUTONS FLOTTANTS — transition améliorée
+   ------------------------------------------------------------ */
+@media (max-width: 768px) {
+  /* 🌿 Transition plus fluide, lente et perceptible */
+  #floating-services,
+  #floating-blog,
+  #floating-podcasts {
+    position: fixed;
+    right: 20px;
+    transition:
+      bottom 1.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+      transform 1.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+      opacity 1s ease;
+    will-change: bottom, transform;
+  }
+
+  /* --- Position par défaut (repos bas) --- */
+  #floating-services {
+    bottom: 40px;
+  }
+  #floating-blog {
+    bottom: 100px;
+  }
+  #floating-podcasts {
+    bottom: 160px;
+  }
+
+  /* --- Pendant la lecture vidéo --- */
+  body.floating-shift #floating-services {
+    bottom: 50%;
+    transform: translateY(-50%);
+  }
+  body.floating-shift #floating-blog {
+    bottom: calc(50% - 70px);
+    transform: translateY(-50%);
+  }
+  body.floating-shift #floating-podcasts {
+    bottom: calc(50% - 140px);
+    transform: translateY(-50%);
+  }
+
+  /* --- Apparition initiale --- */
+  #floating-services,
+  #floating-blog,
+  #floating-podcasts {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  body.floating-ready #floating-services,
+  body.floating-ready #floating-blog,
+  body.floating-ready #floating-podcasts {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+  }
+}
+
+
+/* ============================================================
+   🌿 ANIMATION D’APPARITION DES BOUTONS FLOTTANTS AU CHARGEMENT
+   ------------------------------------------------------------ */
+
+/* État initial (invisible au chargement) */
+#floating-services,
+#floating-blog,
+#floating-podcasts {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* État animé une fois chargés */
+body.floating-ready #floating-services,
+body.floating-ready #floating-blog,
+body.floating-ready #floating-podcasts {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* ============================================================
+   🌿 APPARITION CINÉMATIQUE DE LA VIDÉO SELON LE SCROLL
+   ------------------------------------------------------------ */
+.video-floating {
+  animation: none !important;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(60px) scale(0.9); /* départ plus bas + réduit */
+  transition:
+    opacity 1.2s cubic-bezier(0.25, 0.8, 0.25, 1),
+    transform 1.2s cubic-bezier(0.25, 0.8, 0.25, 1),
+    visibility 1s ease;
+  will-change: opacity, transform;
+}
+
+/* ✅ Quand elle devient visible (après scroll) */
+.video-floating.video-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+@media (max-width: 768px) {
+  .video-floating {
+    transition:
+      opacity 1.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+      transform 1.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+      visibility 1s ease;
+  }
+}
+
+/* 🌿 Transition douce entre deux vidéos */
+#introVideo.fade-out {
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+#introVideo.fade-in {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.video-backdrop {
+  transition: opacity 0.5s ease;
+}
+.video-backdrop.active {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+
+/* 📱 Optimisation mobile de la barre vidéo */
+@media (max-width: 768px) {
+  .video-progress {
+    height: 10px; /* zone plus large pour le doigt */
+  }
+
+  .video-progress:hover {
+    height: 12px;
+  }
+
+  /* Le curseur (handle) reste visible et un peu plus gros */
+  .video-progress-handle {
+    width: 20px;
+    height: 20px;
+    opacity: 1; /* toujours visible sur mobile */
+    background: var(--accent-hover);
+    border: 2px solid #fff;
+  }
+
+  /* On augmente un peu la zone de clic autour du handle */
+  .video-progress-handle::after {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+  }
+
+  /* On évite les tremblements sur petit écran */
+  .video-progress-bar {
+    transition: none;
+  }
+}
