@@ -1773,3 +1773,209 @@ section li.star::after {
 .credits a:hover{
   opacity: 1;
 }
+/* =========================
+   📅 Booking (style eTermin)
+   ========================= */
+
+.booking-grid{
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 2rem;
+  align-items: start;
+  margin-top: 1rem;
+}
+
+.booking-services{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.service-card{
+  text-align: left;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.10);
+  border-radius: 16px;
+  padding: 1.2rem 1.2rem 1.1rem;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.service-card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.10);
+}
+
+.service-card.active{
+  border-color: color-mix(in srgb, var(--accent-color) 65%, transparent);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+}
+
+.service-card__title{
+  font-weight: 800;
+  color: var(--accent-color);
+  font-size: 1.05rem;
+  margin-bottom: .4rem;
+}
+
+.service-card__meta{
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: #666;
+  font-size: .92rem;
+  margin-bottom: .6rem;
+}
+
+.service-card__price{
+  font-weight: 700;
+  color: #444;
+}
+
+.service-card__desc{
+  color: #444;
+  line-height: 1.45;
+  font-size: .95rem;
+}
+
+/* Résumé à droite */
+.booking-summary h3{
+  margin: 0 0 .8rem;
+  color: var(--accent-color);
+}
+
+/* ✅ rend le résumé "posé" comme eTermin */
+.booking-summary{
+  position: sticky;
+  top: 110px; /* ajuste selon la hauteur de ton header */
+}
+
+.summary-box{
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 16px;
+  padding: 1rem 1rem;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+}
+
+.summary-step{
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding-bottom: .9rem;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  margin-bottom: .9rem;
+}
+
+.step-dot{
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--accent-light) 70%, white);
+  color: #333;
+  font-weight: 800;
+}
+
+.summary-line{
+  display: flex;
+  justify-content: space-between;
+  padding: .45rem 0;
+  color: #444;
+}
+
+.summary-hint{
+  margin-top: .9rem;
+  font-size: .92rem;
+  color: #555;
+}
+
+/* =========================
+   Cal.com embed : clean + crop branding
+   ========================= */
+
+:root{
+  --cal-crop-bottom: 34px; /* ajuste si besoin: 28-40 */
+  --cal-crop-top: 0px;     /* mets 10px si tu veux couper un header gris */
+}
+
+.cal-embed{
+  margin-top: 1.6rem;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  overflow: hidden; /* clé */
+  padding-bottom: var(--cal-crop-bottom);
+  padding-top: var(--cal-crop-top);
+}
+
+.cal-embed iframe{
+  display: block;
+  width: 100%;
+  height: 780px;
+  border: 0;
+  margin-bottom: calc(-1 * var(--cal-crop-bottom));
+  margin-top: calc(-1 * var(--cal-crop-top));
+}
+
+/* =========================
+   Steps + affichage conditionnel
+   ========================= */
+
+.step-title{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin: 1.2rem 0 1rem;
+  color: var(--accent-color);
+  font-size: 1.05rem;
+}
+
+.step-title span{
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: var(--accent-light);
+  font-weight:800;
+}
+
+.step-block{
+  margin-top: 1.2rem;
+}
+
+.is-hidden{
+  display: none;
+}
+
+/* =========================
+   Responsive
+   ========================= */
+
+@media (max-width: 900px){
+  .booking-grid{ grid-template-columns: 1fr; }
+  .booking-services{ grid-template-columns: 1fr; }
+  .booking-summary{ position: static; } /* sticky off sur mobile */
+  .cal-embed iframe{ height: 720px; }
+}
+
+/* =========================
+   Supprimer bande grise + Cal.com
+   ========================= */
+
+.cal-embed{
+  overflow: hidden;
+  position: relative;
+}
+
+/* Coupe le bas où se trouve le branding */
+.cal-embed iframe{
+  height: 820px;      /* augmente un peu */
+  margin-bottom: -60px; /* coupe plus fort */
+}

@@ -6,7 +6,6 @@
   <title>Contatti - Dott.ssa Giorgia Argentini</title>
   <meta name="description" content="Contatta la Dott.ssa Giorgia Argentini per informazioni, appuntamenti e consulenze mediche." />
   <link rel="stylesheet" href="style.css" />
-  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 
   <!-- ✅ Mini CSS local pour mise en page côte à côte (desktop) / empilé (mobile) -->
   <style>
@@ -105,19 +104,16 @@
         </div>
       </a>
 
-      <a class="info-item info-link"
-        href="#"
-        id="open-calendly"
-        aria-label="Apri il calendario per prenotare online">
+    <a class="info-item info-link"
+      href="#prenota-online"
+      aria-label="Vai alla prenotazione online">
 
-        <span class="info-icon">🗓️</span>
-
-        <div>
-          <strong>Prenotazione online</strong>
-          <p>Apri il calendario</p>
-        </div>
-
-      </a>
+      <span class="info-icon">🗓️</span>
+      <div>
+        <strong>Prenotazione online</strong>
+        <p>Apri il calendario</p>
+      </div>
+    </a>
 
 
       
@@ -152,6 +148,111 @@
 
     </div>
   </section>
+
+  <section id="prenota-online" class="booking">
+    <h2>Prenota online</h2>
+
+    <!-- STEP 1 -->
+    <h3 class="step-title"><span>1</span> Seleziona la prestazione</h3>
+
+    <div class="booking-grid">
+      <!-- COLONNE GAUCHE -->
+      <div class="booking-services">
+
+        <button class="service-card active"
+                type="button"
+                data-cal="https://cal.com/raphael-claassen-izkwbj/60min?embed=1&hideEventTypeDetails=1&theme=light"
+                data-title="Visita medica integrata"
+                data-duration="60 min"
+                data-price="Prezzo su richiesta">
+
+          <div class="service-card__title">Visita medica integrata</div>
+
+          <div class="service-card__meta">
+            <span>60 min</span>
+            <span class="service-card__price">Prezzo su richiesta</span>
+          </div>
+
+          <div class="service-card__desc">
+            Valutazione completa e definizione del percorso.
+          </div>
+
+        </button>
+
+        <button class="service-card"
+                type="button"
+                data-cal="https://cal.com/raphael-claassen-izkwbj/30min?embed=1&hideEventTypeDetails=1&theme=light"
+                data-title="Agopuntura clinica"
+                data-duration="30 min"
+                data-price="Prezzo su richiesta">
+
+          <div class="service-card__title">Agopuntura clinica</div>
+
+          <div class="service-card__meta">
+            <span>30 min</span>
+            <span class="service-card__price">Prezzo su richiesta</span>
+          </div>
+
+          <div class="service-card__desc">
+            Trattamento mirato per dolore, tensioni e stress.
+          </div>
+
+        </button>
+
+      </div>
+
+      <!-- COLONNE DROITE -->
+      <aside class="booking-summary">
+
+        <h3>La tua prenotazione</h3>
+
+        <div class="summary-box">
+
+          <div class="summary-step">
+            <span class="step-dot">1</span>
+            <div>
+              <strong>Prestazione</strong>
+              <div id="summary-title">Visita medica integrata</div>
+            </div>
+          </div>
+
+          <div class="summary-line">
+            <span>Durata</span>
+            <span id="summary-duration">60 min</span>
+          </div>
+
+          <div class="summary-line">
+            <span>Prezzo</span>
+            <span id="summary-price">Prezzo su richiesta</span>
+          </div>
+
+        </div>
+
+        <p class="summary-hint">
+          Seleziona la prestazione e poi scegli data e orario.
+        </p>
+
+      </aside>
+    </div>
+
+  <!-- STEP 2 (caché au début) -->
+  <div id="step2" class="step-block is-hidden">
+    <h3 class="step-title"><span>2</span> Scegli giorno e orario</h3>
+
+    <div class="cal-embed">
+      <iframe id="cal-iframe"
+              src="https://cal.com/raphael-claassen-izkwbj/60min?embed=1&hideEventTypeDetails=1&theme=light"
+              loading="lazy"
+              allow="camera; microphone; fullscreen; payment"
+              style="width:100%; height:780px; border:0; border-radius:16px;">
+      </iframe>
+    </div>
+
+  </div>
+
+
+  </section>
+
 
 
   <!-- FORMULARIO -->
@@ -274,20 +375,43 @@
   });
 </script>
 
-<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const btn = document.getElementById("open-calendly");
-    if (!btn) return;
+  const cards = document.querySelectorAll(".service-card");
+  const iframe = document.getElementById("cal-iframe");
 
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      Calendly.initPopupWidget({
-        url: "https://calendly.com/TON-USERNAME/TON-EVENT?hide_event_type_details=1&hide_gdpr_banner=1"
-      });
+  const sTitle = document.getElementById("summary-title");
+  const sDuration = document.getElementById("summary-duration");
+  const sPrice = document.getElementById("summary-price");
+
+  const step2 = document.getElementById("step2");
+
+  // Au départ : cacher étape 2
+  if (step2) step2.classList.add("is-hidden");
+
+  function showStep2(){
+    if (!step2) return;
+    step2.classList.remove("is-hidden");
+    // ✅ pas de scroll ici
+  }
+
+  cards.forEach(btn => {
+    btn.addEventListener("click", () => {
+      cards.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      iframe.src = btn.getAttribute("data-cal");
+
+      sTitle.textContent = btn.getAttribute("data-title") || "";
+      sDuration.textContent = btn.getAttribute("data-duration") || "";
+      sPrice.textContent = btn.getAttribute("data-price") || "";
+
+      // ✅ on affiche juste l'étape 2, sans bouger la page
+      showStep2();
     });
   });
 </script>
+
+
 
 </body>
 </html>
