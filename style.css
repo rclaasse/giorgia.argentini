@@ -1996,8 +1996,8 @@ section li.star::after {
 @media (max-width: 900px){
   :root{
     --cal-crop-top: 54px;
-    --cal-mask-bottom: 140px;
-    --cal-iframe-height: 620px;
+    --cal-mask-bottom: 1px;
+    --cal-iframe-height: 720px;
   }
 }
 
