@@ -1719,3 +1719,27 @@ section li.star::after {
   transform: translateY(-6px);
   box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
 }
+
+
+/* =====================================
+   📱 Boutons flottants version mobile
+   ===================================== */
+@media (max-width: 768px) {
+
+  .floating {
+    min-width: auto;        /* enlève largeur minimale */
+    padding: 8px 14px;      /* moins de padding */
+    font-size: 0.85rem;     /* texte plus petit */
+    right: 14px;            /* un peu plus proche du bord */
+  }
+
+  #floating-servizi {
+    bottom: 85px;           /* ajuste empilement */
+  }
+
+  #floating-prenota {
+    bottom: 30px;
+  }
+
+}
+
