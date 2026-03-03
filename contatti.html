@@ -153,63 +153,48 @@
     <h2>Prenota online</h2>
 
     <!-- STEP 1 -->
-    <h3 class="step-title"><span>1</span> Seleziona la prestazione</h3>
+    <div class="step-block" id="step-1">
+      <div class="step-title"><span>1</span> Seleziona la prestazione</div>
 
-    <div class="booking-grid">
-      <!-- COLONNE GAUCHE -->
-      <div class="booking-services">
-
+      <div class="booking-services" aria-label="Seleziona una prestazione">
         <button class="service-card active"
                 type="button"
-                data-cal="https://cal.com/raphael-claassen-izkwbj/60min?embed=1&hideEventTypeDetails=1&theme=light"
+                data-cal="https://cal.com/raphael-claassen-izkwbj/60min?embed=1"
                 data-title="Visita medica integrata"
                 data-duration="60 min"
                 data-price="Prezzo su richiesta">
-
           <div class="service-card__title">Visita medica integrata</div>
-
           <div class="service-card__meta">
             <span>60 min</span>
             <span class="service-card__price">Prezzo su richiesta</span>
           </div>
-
-          <div class="service-card__desc">
-            Valutazione completa e definizione del percorso.
-          </div>
-
+          <div class="service-card__desc">Valutazione completa e definizione del percorso.</div>
         </button>
 
         <button class="service-card"
                 type="button"
-                data-cal="https://cal.com/raphael-claassen-izkwbj/30min?embed=1&hideEventTypeDetails=1&theme=light"
+                data-cal="https://cal.com/raphael-claassen-izkwbj/30min?embed=1"
                 data-title="Agopuntura clinica"
                 data-duration="30 min"
                 data-price="Prezzo su richiesta">
-
           <div class="service-card__title">Agopuntura clinica</div>
-
           <div class="service-card__meta">
             <span>30 min</span>
             <span class="service-card__price">Prezzo su richiesta</span>
           </div>
-
-          <div class="service-card__desc">
-            Trattamento mirato per dolore, tensioni e stress.
-          </div>
-
+          <div class="service-card__desc">Trattamento mirato per dolore, tensioni e stress.</div>
         </button>
-
       </div>
+    </div>
 
-      <!-- COLONNE DROITE -->
-      <aside class="booking-summary">
+    <!-- STEP 2 -->
+    <div class="step-block is-hidden" id="step-2">
+      <div class="step-title"><span>2</span> La tua prenotazione</div>
 
-        <h3>La tua prenotazione</h3>
-
+      <aside class="booking-summary" aria-label="Riepilogo prenotazione">
         <div class="summary-box">
-
           <div class="summary-step">
-            <span class="step-dot">1</span>
+            <span class="step-dot">✓</span>
             <div>
               <strong>Prestazione</strong>
               <div id="summary-title">Visita medica integrata</div>
@@ -225,32 +210,34 @@
             <span>Prezzo</span>
             <span id="summary-price">Prezzo su richiesta</span>
           </div>
-
         </div>
 
         <p class="summary-hint">
-          Seleziona la prestazione e poi scegli data e orario.
+          Ora scegli giorno e orario nel calendario qui sotto.
         </p>
-
       </aside>
+    <div class="step-actions">
+      <button type="button" class="btn" id="step2-ok">OK, continua</button>
+    </div>
     </div>
 
-  <!-- STEP 2 (caché au début) -->
-  <div id="step2" class="step-block is-hidden">
-    <h3 class="step-title"><span>2</span> Scegli giorno e orario</h3>
+    <!-- STEP 3 -->
+    <div class="step-block is-hidden" id="step-3">
+      <div class="step-title" id="step3-title">
+        <span>3</span> Scegli giorno e orario
+      </div>
 
-    <div class="cal-embed">
-      <iframe id="cal-iframe"
-              src="https://cal.com/raphael-claassen-izkwbj/60min?embed=1&hideEventTypeDetails=1&theme=light"
-              loading="lazy"
-              allow="camera; microphone; fullscreen; payment"
-              style="width:100%; height:780px; border:0; border-radius:16px;">
-      </iframe>
+      <div class="cal-embed">
+        <div class="cal-embed__inner">
+          <iframe id="cal-iframe"
+                  src="https://cal.com/raphael-claassen-izkwbj/60min?embed=1"
+                  loading="lazy"
+                  allow="camera; microphone; fullscreen; payment"
+                  style="width:100%; border:0;">
+          </iframe>
+        </div>
+      </div>
     </div>
-
-  </div>
-
-
   </section>
 
 
@@ -375,42 +362,69 @@
   });
 </script>
 
+
 <script>
+document.addEventListener("DOMContentLoaded", () => {
   const cards = document.querySelectorAll(".service-card");
   const iframe = document.getElementById("cal-iframe");
+
+  const step2 = document.getElementById("step-2");
+  const step3 = document.getElementById("step-3");
+  const okBtn = document.getElementById("step2-ok");
 
   const sTitle = document.getElementById("summary-title");
   const sDuration = document.getElementById("summary-duration");
   const sPrice = document.getElementById("summary-price");
 
-  const step2 = document.getElementById("step2");
+  let selectedUrl = ""; // URL cal.com choisi à l'étape 1
 
-  // Au départ : cacher étape 2
-  if (step2) step2.classList.add("is-hidden");
+  // ✅ état initial : on cache 2 et 3 (au cas où)
+  step2?.classList.add("is-hidden");
+  step3?.classList.add("is-hidden");
 
-  function showStep2(){
-    if (!step2) return;
-    step2.classList.remove("is-hidden");
-    // ✅ pas de scroll ici
-  }
+  // (optionnel) éviter de charger cal.com tant que step 3 n'est pas ouvert
+  if (iframe) iframe.dataset.src = iframe.getAttribute("src") || "";
+  if (iframe) iframe.removeAttribute("src");
 
   cards.forEach(btn => {
     btn.addEventListener("click", () => {
+      // active card
       cards.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
 
-      iframe.src = btn.getAttribute("data-cal");
-
+      // update résumé
       sTitle.textContent = btn.getAttribute("data-title") || "";
       sDuration.textContent = btn.getAttribute("data-duration") || "";
       sPrice.textContent = btn.getAttribute("data-price") || "";
 
-      // ✅ on affiche juste l'étape 2, sans bouger la page
-      showStep2();
+      // mémorise l'URL cal.com (mais ne l'affiche pas encore)
+      selectedUrl = btn.getAttribute("data-cal") || "";
+
+      // affiche étape 2, cache étape 3 tant que OK pas cliqué
+      step2?.classList.remove("is-hidden");
+      step3?.classList.add("is-hidden");
     });
   });
-</script>
 
+  okBtn?.addEventListener("click", () => {
+    // si rien sélectionné, on bloque
+    if (!selectedUrl) return;
+
+    // charge cal.com seulement maintenant
+    if (iframe) iframe.setAttribute("src", selectedUrl);
+
+    // affiche étape 3
+    step3?.classList.remove("is-hidden");
+
+const step3Title = document.getElementById("step3-title");
+
+step3Title?.scrollIntoView({
+  behavior: "smooth",
+  block: "start"
+});
+  });
+});
+</script>
 
 
 </body>
