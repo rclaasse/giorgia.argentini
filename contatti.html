@@ -189,7 +189,7 @@
 
     <!-- STEP 2 -->
     <div class="step-block is-hidden" id="step-2">
-      <div class="step-title"><span>2</span> La tua prenotazione</div>
+      <div class="step-title" id="step2-title"><span>2</span> La tua prenotazione</div>
 
       <aside class="booking-summary" aria-label="Riepilogo prenotazione">
         <div class="summary-box">
@@ -362,7 +362,6 @@
   });
 </script>
 
-
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const cards = document.querySelectorAll(".service-card");
@@ -378,18 +377,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let selectedUrl = ""; // URL cal.com choisi à l'étape 1
 
-  // ✅ état initial : on cache 2 et 3 (au cas où)
+  // état initial
   step2?.classList.add("is-hidden");
   step3?.classList.add("is-hidden");
 
-  // (optionnel) éviter de charger cal.com tant que step 3 n'est pas ouvert
-  if (iframe) iframe.dataset.src = iframe.getAttribute("src") || "";
-  if (iframe) iframe.removeAttribute("src");
+  // ne pas charger cal.com tant que step 3 n'est pas ouvert
+  if (iframe) {
+    iframe.dataset.src = iframe.getAttribute("src") || "";
+    iframe.removeAttribute("src");
+  }
 
-  cards.forEach(btn => {
+  // clic sur une prestation (STEP 1 -> STEP 2)
+  cards.forEach((btn) => {
     btn.addEventListener("click", () => {
       // active card
-      cards.forEach(b => b.classList.remove("active"));
+      cards.forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
 
       // update résumé
@@ -397,34 +399,37 @@ document.addEventListener("DOMContentLoaded", () => {
       sDuration.textContent = btn.getAttribute("data-duration") || "";
       sPrice.textContent = btn.getAttribute("data-price") || "";
 
-      // mémorise l'URL cal.com (mais ne l'affiche pas encore)
+      // mémorise l'URL cal.com
       selectedUrl = btn.getAttribute("data-cal") || "";
 
       // affiche étape 2, cache étape 3 tant que OK pas cliqué
       step2?.classList.remove("is-hidden");
       step3?.classList.add("is-hidden");
+
+      // scroll vers le titre étape 2
+      document.getElementById("step2-title")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
     });
   });
 
+  // bouton OK (STEP 2 -> STEP 3)
   okBtn?.addEventListener("click", () => {
-    // si rien sélectionné, on bloque
     if (!selectedUrl) return;
 
-    // charge cal.com seulement maintenant
     if (iframe) iframe.setAttribute("src", selectedUrl);
 
-    // affiche étape 3
     step3?.classList.remove("is-hidden");
 
-const step3Title = document.getElementById("step3-title");
-
-step3Title?.scrollIntoView({
-  behavior: "smooth",
-  block: "start"
-});
+    document.getElementById("step3-title")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
   });
 });
 </script>
+
 
 
 </body>

@@ -2016,3 +2016,4 @@ section li.star::after {
 #step3-title{
   scroll-margin-top: 120px; /* ajuste si ton header est plus grand */
 }
+#step2-title{ scroll-margin-top: 120px; }
