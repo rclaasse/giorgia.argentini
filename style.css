@@ -1743,3 +1743,18 @@ section li.star::after {
 
 }
 
+/* 📱 Ajustement mobile uniquement */
+@media (max-width: 768px) {
+
+  .whatsapp-float{
+    bottom: 135px;   /* rapproche des autres boutons */
+    width: 48px;     /* plus petit */
+    height: 48px;
+  }
+
+  .whatsapp-float svg{
+    width: 22px;
+    height: 22px;
+  }
+
+}
